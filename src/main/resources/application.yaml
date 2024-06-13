@@ -1,0 +1,39 @@
+server:
+  port: 3333
+  error:
+    whitelabel:
+      enabled: false
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+#    root: DEBUG
+#    org.apache.tomcat.util.net.NioEndpoint: ERROR
+#    sun.rmi: ERROR
+#    java.io: ERROR
+#    javax.management: ERROR
+
+spring:
+  application:
+    name: auth-server-sso
+  security:
+    oauth2:
+      authorizationserver:
+        issuer-uri: http://localhost:3333
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth-server-test-platform?useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true
+    username: postgres
+    password: 45567899
+    jpa:
+      hibernate:
+        ddlAuto: update
+        generate-ddl: true
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+          jdbc:
+            lob:
+              non_contextual_creation: true
+
