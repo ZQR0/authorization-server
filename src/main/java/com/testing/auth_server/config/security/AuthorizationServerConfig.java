@@ -12,6 +12,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
@@ -23,6 +24,7 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
+import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
@@ -34,10 +36,12 @@ import org.springframework.security.web.authentication.LoginUrlAuthenticationEnt
 @Slf4j
 public class AuthorizationServerConfig {
 
-    private static final String TEMP_TOKEN_ENDPOINT = "oauth2/token";
+    private static final String TEMP_TOKEN_ENDPOINT = "/oauth2/token";
     private static final String TEMP_REDIRECTION_URI = "http://localhost:3333/code";
 
+
     private final AuthorizationServerProperty authorizationServerProperty;
+    private final PasswordEncoder passwordEncoder;
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -62,7 +66,7 @@ public class AuthorizationServerConfig {
         RegisteredClient oidcClient = RegisteredClient.withId("test-client-id")
                 .clientId("test-client")
                 .clientName("Test Client")
-                .clientSecret("{noop}secret")
+                .clientSecret(this.passwordEncoder.encode("secret"))
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
@@ -71,7 +75,7 @@ public class AuthorizationServerConfig {
                 .scope(OidcScopes.OPENID)
                 .scope(OidcScopes.PROFILE)
                 .clientSettings(ClientSettings.builder()
-                        // FIXME: 13.06.2024 Если этот параметр true, то тогда происходить Denied Exception
+                        // FIXME: 13.06.2024 Если этот параметр true, то тогда происходить Access Denied Exception
                         .requireAuthorizationConsent(false)
                         .build())
                 .build();
@@ -88,6 +92,7 @@ public class AuthorizationServerConfig {
     public AuthorizationServerSettings authorizationServerSettings() {
         return AuthorizationServerSettings.builder()
                 .issuer(this.authorizationServerProperty.getIssuerUri())
+                .tokenEndpoint(TEMP_TOKEN_ENDPOINT)
                 .build();
     }
 
