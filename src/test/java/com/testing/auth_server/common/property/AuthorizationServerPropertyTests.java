@@ -1,6 +1,5 @@
-package com.testing.auth_server;
+package com.testing.auth_server.common.property;
 
-import com.testing.auth_server.common.property.AuthorizationServerProperty;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
