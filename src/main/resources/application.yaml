@@ -9,24 +9,34 @@ logging:
     org:
       springframework:
         security: DEBUG
-#    root: DEBUG
-#    org.apache.tomcat.util.net.NioEndpoint: ERROR
-#    sun.rmi: ERROR
-#    java.io: ERROR
-#    javax.management: ERROR
 
 spring:
   application:
     name: auth-server-sso
+  mvc:
+    static-path-pattern: /static/**
+    cors:
+      configs:
+          pattern: /**
+          allowed-origins: "http://localhost:4444, http://localhost:4311, http://localhost:5555"
+          allowed-headers: "*"
+          exposed-headers: "auth-server-header"
+          allowed-methods: "*"
+          allow-credentials: true
+  web:
+    resources:
+      static-locations: classpath:static
   security:
     oauth2:
       authorizationserver:
         issuer-uri: http://localhost:3333
   datasource:
-    url: jdbc:postgresql://localhost:5432/auth-server-test-platform?useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true
+    url: jdbc:postgresql://localhost:5433/auth-server-test-platform?useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true
     username: postgres
     password: 45567899
+    driver-class-name: org.postgresql.Driver
     jpa:
+      show-sql: true
       hibernate:
         ddlAuto: update
         generate-ddl: true
