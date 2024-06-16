@@ -1,4 +1,4 @@
-package com.testing.auth_server.config.security;
+package com.testing.auth_server.config.crypto;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
