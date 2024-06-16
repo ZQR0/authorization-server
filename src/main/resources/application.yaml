@@ -31,7 +31,7 @@ spring:
       authorizationserver:
         issuer-uri: http://localhost:3333
   datasource:
-    url: jdbc:postgresql://localhost:5433/auth-server-test-platform?useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true
+    url: jdbc:postgresql://localhost:5432/auth-server-test-platform?useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true
     username: postgres
     password: 45567899
     driver-class-name: org.postgresql.Driver
