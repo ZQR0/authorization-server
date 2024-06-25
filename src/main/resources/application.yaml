@@ -13,6 +13,10 @@ logging:
 spring:
   application:
     name: auth-server-sso
+  liquibase:
+    enabled: true
+    change-log: classpath:database/db.changelog.yml
+    contexts: prod
   mvc:
     static-path-pattern: /static/**
     cors:
@@ -34,16 +38,25 @@ spring:
     url: jdbc:postgresql://localhost:5432/auth-server-test-platform?useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true
     username: postgres
     password: 45567899
-    driver-class-name: org.postgresql.Driver
+    driver-class-name: "org.postgresql.Driver"
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 15
+      minimum-idle: 10
+      initialization-fail-timeout: 1
+      leak-detection-threshold: 0
+      pool-name: "[HikariPool-auth-server]"
+      register-mbeans: true
   jpa:
     show-sql: true
+    dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
     hibernate:
-      ddlAuto: update
-      generate-ddl: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        jdbc:
-          lob:
-            non_contextual_creation: true
+      ddlAuto: none
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        jdbc:
+#          lob:
+#            non_contextual_creation: true
 

@@ -1,0 +1,46 @@
+databaseChangeLog:
+  ## tables
+  - include:
+      file: object/users.sql
+      relativeToChangeLogFile: true
+      contextFilter: prod
+  - include:
+      file: object/roles.sql
+      relativeToChangeLogFile: true
+      contextFilter: prod
+  - include:
+      file: object/authorities.sql
+      relativeToChangeLogFile: true
+      contextFilter: prod
+  - include:
+      file: object/roles-authorities.sql
+      relativeToChangeLogFile: true
+      contextFilter: prod
+  - include:
+      file: object/user-roles.sql
+      relativeToChangeLogFile: true
+      contextFilter: prod
+
+
+  ## data for tables
+  - include:
+      file: data/default-authorities-data.sql
+      relativeToChangeLogFile: true
+      contextFilter: prod
+  - include:
+      file: data/default-roles.sql
+      relativeToChangeLogFile: true
+      contextFilter: prod
+  - include:
+      file: data/roles-authorities-data.sql
+      relativeToChangeLogFile: true
+      contextFilter: prod
+  - include:
+      file: data/dev/default-users.sql
+      relativeToChangeLogFile: true
+      contextFilter: prod
+  - include:
+      file: data/user-roles-data.sql
+      relativeToChangeLogFile: true
+      contextFilter: prod
+
