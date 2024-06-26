@@ -1,24 +1,16 @@
 package com.testing.auth_server.config.security;
 
+import com.testing.auth_server.common.constant.SecurityConstants;
 import com.testing.auth_server.service.details.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.PasswordManagementConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -33,7 +25,6 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authz -> {
             authz
-                    .requestMatchers("/api/v1/users/get-all/").permitAll()
                     .requestMatchers("/api/v1/users/**").permitAll()
                     .anyRequest().authenticated();
         });
@@ -46,18 +37,18 @@ public class WebSecurityConfig {
 
 
         http.formLogin(Customizer.withDefaults());
+
+        // Logout конфигурация
+        http.logout(configurer -> {
+            configurer
+                    .logoutUrl(SecurityConstants.LOGOUT_PAGE)
+                    .clearAuthentication(true)
+                    .logoutSuccessHandler((request, response, authentication) -> {
+                        response.sendRedirect(SecurityConstants.LOGIN_PAGE);
+                    });
+        });
+
         return http.build();
     }
-
-//    @Bean
-//    public UserDetailsService users() {
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password(this.passwordEncoder.encode("45567899"))
-//                .roles("USER")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
 
 }
