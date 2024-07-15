@@ -17,4 +17,19 @@ public class AuthorizationServerPropertyTests {
         assertThat(this.authorizationServerProperty.getIssuerUri()).isNotNull();
         System.out.println(this.authorizationServerProperty.getIssuerUri());
     }
+
+    @Test
+    void authenticationSuccessUrlIsNotNull() {
+        assertThat(this.authorizationServerProperty.getAuthenticationSuccessUrl()).isNotNull();
+    }
+
+    @Test
+    void savedRequestUrlStartsWithParamIsNotNull() {
+        assertThat(this.authorizationServerProperty.getSavedRequestUrlStartsWith()).isNotNull();
+    }
+
+    @Test
+    void customHandlerHeaderNameIsNotNull() {
+        assertThat(this.authorizationServerProperty.getCustomHandlerHeaderName()).isNotNull();
+    }
 }
