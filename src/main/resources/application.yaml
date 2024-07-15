@@ -34,6 +34,9 @@ spring:
     oauth2:
       authorizationserver:
         issuer-uri: http://localhost:3333
+        authentication-success-url: http://localhost:3333/code
+        saved-request-url-starts-with: http://localhost:7777/oauth2/authorize
+        custom-handler-header-name: auth-server-header
   datasource:
     url: jdbc:postgresql://localhost:5432/auth-server-test-platform?useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true
     username: postgres

@@ -76,6 +76,7 @@ public class AuthorizedUserDetails implements UserDetails, OAuth2User {
         return this.isEnabled;
     }
 
+    // ОЧЕНЬ ВАЖНО!!! Используем email вместо username, т.к. логин происходит через email
     @Override
     public String getName() {
         return this.email;

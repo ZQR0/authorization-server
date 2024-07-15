@@ -1,9 +1,9 @@
-package com.testing.auth_server.service.details;
+package com.testing.auth_server.service.impl;
 
 
 import com.testing.auth_server.dao.entity.UserEntity;
 import com.testing.auth_server.mapper.UserEntityToAuthorizedUserEntityMapper;
-import com.testing.auth_server.service.common.UserService;
+import com.testing.auth_server.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;

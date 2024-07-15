@@ -1,7 +1,7 @@
 package com.testing.auth_server.controller;
 
 
-import com.testing.auth_server.service.common.UserService;
+import com.testing.auth_server.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

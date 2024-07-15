@@ -20,6 +20,10 @@ databaseChangeLog:
       file: object/user-roles.sql
       relativeToChangeLogFile: true
       contextFilter: prod
+  - include:
+      file: object/oauth2-clients.sql
+      relativeToChangeLogFile: true
+      contextFilter: prod
 
 
   ## data for tables
@@ -41,6 +45,10 @@ databaseChangeLog:
       contextFilter: prod
   - include:
       file: data/user-roles-data.sql
+      relativeToChangeLogFile: true
+      contextFilter: prod
+  - include:
+      file: data/default-oauth2-clients.sql
       relativeToChangeLogFile: true
       contextFilter: prod
 

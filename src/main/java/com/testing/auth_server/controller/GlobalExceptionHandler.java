@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.nio.file.AccessDeniedException;
 import java.sql.SQLException;
 
 
@@ -80,6 +81,18 @@ public class GlobalExceptionHandler {
                         .stackTrace(exception.getStackTrace())
                         .build(),
                 HttpStatus.BAD_REQUEST
+        );
+    }
+
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<?> accessDeniedExceptionHandler(@NonNull AccessDeniedException exception) {
+        return new ResponseEntity<>(
+                ErrorResponseDto.builder()
+                        .message(exception.getMessage())
+                        .stackTrace(exception.getStackTrace())
+                        .build(),
+                HttpStatus.FORBIDDEN
         );
     }
 

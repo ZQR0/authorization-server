@@ -14,4 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 public class AuthorizationServerProperty {
     private String issuerUri;
+    private String authenticationSuccessUrl;
+    private String savedRequestUrlStartsWith;
+    private String customHandlerHeaderName;
 }

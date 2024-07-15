@@ -1,4 +1,4 @@
-package com.testing.auth_server.service.common;
+package com.testing.auth_server.service;
 
 import com.testing.auth_server.dao.entity.UserEntity;
 import com.testing.auth_server.dto.UserRegistrationDto;
