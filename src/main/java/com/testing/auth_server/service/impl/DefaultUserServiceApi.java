@@ -51,12 +51,4 @@ public class DefaultUserServiceApi implements UserService {
                         () -> new UserNotFoundException(String.format("User with username %s not found :(", username))
                 );
     }
-
-
-
-    @Transactional(isolation = Isolation.REPEATABLE_READ)
-    @Override
-    public void registerUser(UserRegistrationDto dto) throws Exception {
-        log.warn("Empty method!!!");
-    }
 }
