@@ -25,9 +25,6 @@ public class UserRegistrationDto {
     @JsonProperty(namespace = "birthday", required = true)
     private LocalDate birthday;
 
-    @JsonProperty(namespace = "creation_date", required = true)
-    private LocalDateTime creationDate;
-
     @JsonProperty(namespace = "active", required = true)
     private boolean active;
 

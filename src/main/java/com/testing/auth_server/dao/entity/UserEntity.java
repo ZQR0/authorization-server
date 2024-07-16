@@ -3,7 +3,6 @@ package com.testing.auth_server.dao.entity;
 
 import com.testing.auth_server.dao.utils.Builder;
 import jakarta.persistence.*;
-import jdk.jfr.Timestamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,12 +39,12 @@ public class UserEntity extends AbstractEntity {
     @Column(name = "birthday", nullable = false)
     private LocalDate birthday;
 
-//    @CreationTimestamp
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "user_creation_date", nullable = false)
+    @Column(name = "user_creation_date")
     private LocalDateTime creationDate;
 
-//    @UpdateTimestamp
+    @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "user_updating_date")
     private LocalDateTime updatingDate;

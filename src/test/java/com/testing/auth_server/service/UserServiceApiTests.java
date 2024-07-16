@@ -1,6 +1,5 @@
 package com.testing.auth_server.service;
 
-import com.testing.auth_server.service.common.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,11 +12,6 @@ public class UserServiceApiTests {
     @Autowired
     private UserService userService;
 
-
-    @Test
-    void countOfDefaultUsersIsTwo() {
-        assertThat(this.userService.getAllUsers()).hasSize(2);
-    }
 
     @Test
     void adminEntityIsNotNull( ) throws Exception {

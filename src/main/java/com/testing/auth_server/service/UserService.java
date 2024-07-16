@@ -10,5 +10,4 @@ public interface UserService {
     UserEntity findById(Long id) throws Exception;
     UserEntity findByEmail(String email) throws Exception;
     UserEntity findByUsername(String username) throws Exception;
-    void registerUser(UserRegistrationDto dto) throws Exception;
 }
