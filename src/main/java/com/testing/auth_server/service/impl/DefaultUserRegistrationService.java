@@ -1,6 +1,7 @@
 package com.testing.auth_server.service.impl;
 
 import com.testing.auth_server.common.exception.UserAlreadyExistsException;
+import com.testing.auth_server.dao.entity.AuthorityEntity;
 import com.testing.auth_server.dao.entity.RoleEntity;
 import com.testing.auth_server.dao.entity.UserEntity;
 import com.testing.auth_server.dao.repository.AuthorityRepository;
@@ -8,6 +9,7 @@ import com.testing.auth_server.dao.repository.RoleRepository;
 import com.testing.auth_server.dao.repository.UserRepository;
 import com.testing.auth_server.dto.UserRegistrationDto;
 import com.testing.auth_server.service.UserRegistrationService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -57,11 +59,25 @@ public class DefaultUserRegistrationService implements UserRegistrationService {
         return this.userRepository.findByEmail(email).isPresent();
     }
 
+
     private Set<RoleEntity> prepareDefaultRoles() {
         RoleEntity role = this.roleRepository.getDefaultRole();
+
+        role.setAuthorities(prepareDefaultAuthorities());
+
         Set<RoleEntity> roleSet = new HashSet<>();
         roleSet.add(role);
 
         return roleSet;
+    }
+
+    private Set<AuthorityEntity> prepareDefaultAuthorities() {
+        Set<AuthorityEntity> setOfAuthorities = new HashSet<>();
+        AuthorityEntity readOwnAuthority = this.authorityRepository.getReadOwnDataAuthority();
+        AuthorityEntity writeAuthority = this.authorityRepository.getWriteAuthority();
+        setOfAuthorities.add(readOwnAuthority);
+        setOfAuthorities.add(writeAuthority);
+
+        return setOfAuthorities;
     }
 }
