@@ -16,6 +16,10 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+
+/**
+ * Данный хендлер должен отправлять на клиент URL, на который надо сделать редирект при успешной аутентификации
+ * */
 @Component
 @RequiredArgsConstructor
 @Slf4j

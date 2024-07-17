@@ -56,15 +56,12 @@ public class WebSecurityConfig {
 
         http.securityContext(context -> context.securityContextRepository(this.securityContextRepository));
 
-        http.formLogin(Customizer.withDefaults());
-        // Для работы этой конфигурации нужен отдельный клиент
-//        http.formLogin((configurer) -> {
-//            configurer
-//                    .loginPage(SecurityConstants.LOGIN_PAGE)
-//                    .loginProcessingUrl(SecurityConstants.PROCESSING_LOGIN_PAGE_URL)
-//                    .successHandler(this.authenticationSuccessHandler)
-//                    .failureHandler(this.authenticationFailureHandler);
-//        });
+        http.formLogin((configurer) -> {
+            configurer
+                    .loginPage(SecurityConstants.LOGIN_PAGE)
+                    .successHandler(this.authenticationSuccessHandler)
+                    .failureHandler(this.authenticationFailureHandler);
+        });
 
         // Logout конфигурация
         http.logout(configurer -> {
